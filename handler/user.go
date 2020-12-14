@@ -1,31 +1,37 @@
 package handler
 
 import (
+	"net/http"
+
 	"github.com/labstack/echo"
+	"github.com/truph77/db"
 	"github.com/truph77/models"
 )
 
-//GetUser used to get user info
-func GetUser(c echo.Context) (err error) {
-	//Connect DB
-	// db, err := connectDB()
-	// if err != nil {
-	// 	return
-	// }
+//GetUsers ...
+func GetUsers(c echo.Context) error {
+	db := db.GetDB()
+
 	users := []models.User{}
+
+	db.Find(&users) //select * from Login
+	return c.JSON(http.StatusOK, users)
 }
 
 //CreateUser ...
-func CreateUser(c echo.Context) (err error) {
+func CreateUser(c echo.Context) error {
 
+	return c.JSON(http.StatusOK, "")
 }
 
-//UpdateUser...
-func UpdateUser(c echo.Context) (err error) {
+//UpdateUser ...
+func UpdateUser(c echo.Context) error {
 
+	return c.JSON(http.StatusOK, "")
 }
 
 //DeleteUser ...
-func DeleteUser(c echo.Context) (err error) {
+func DeleteUser(c echo.Context) error {
 
+	return c.JSON(http.StatusOK, "")
 }

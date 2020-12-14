@@ -9,8 +9,8 @@ func main() {
 	e := echo.New()
 
 	// Routes
+	e.GET("/users", handler.GetUsers)
 	e.POST("/users", handler.CreateUser)
-	e.GET("/users/:id", handler.GetUser)
 	e.PUT("/users/:id", handler.UpdateUser)
 	e.DELETE("/users/:id", handler.DeleteUser)
 
