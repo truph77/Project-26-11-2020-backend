@@ -6,7 +6,7 @@ import (
 
 //Configuration struct ...
 type Configuration struct {
-	DBUserName string
+	DBUsername string
 	DBPassword string
 	DBPort     string
 	DBHost     string

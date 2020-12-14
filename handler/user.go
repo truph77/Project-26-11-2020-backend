@@ -1,21 +1,21 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo"
-	"github.com/truph77/db"
 	"github.com/truph77/models"
 )
 
 //GetUsers ...
 func GetUsers(c echo.Context) error {
-	db := db.GetDB()
-
+	// db := db.GetDB()
 	users := []models.User{}
+	fmt.Println(users)
+	// db.Find(&users) //select * from Login
 
-	db.Find(&users) //select * from Login
-	return c.JSON(http.StatusOK, users)
+	return c.JSON(http.StatusOK, "users")
 }
 
 //CreateUser ...

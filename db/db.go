@@ -16,9 +16,9 @@ func Init() {
 	config := config.GetConfig()
 
 	connectionString := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s",
-		config.DBHost, config.DBPort, config.DBUserName, config.DBName, config.DBPassword)
+		config.DBHost, config.DBPort, config.DBUsername, config.DBName, config.DBPassword)
 
-	db, _ = gorm.Open("db", connectionString)
+	db, _ = gorm.Open("postgres", connectionString)
 	if err != nil {
 		fmt.Println(err)
 	} else {
