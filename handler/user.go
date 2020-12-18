@@ -21,8 +21,14 @@ func GetUsers(c echo.Context) error {
 
 //CreateUser ...
 func CreateUser(c echo.Context) error {
+	db := db.GetDB()
 
-	return c.JSON(http.StatusOK, "")
+	user := models.User{}
+	if user.Password == "" || user.Username == "" {
+		return c.String(http.StatusNoContent, "Cant create!")
+	}
+	db.Create(&user)
+	return c.JSON(http.StatusCreated, user)
 }
 
 //UpdateUser ...
@@ -33,6 +39,11 @@ func UpdateUser(c echo.Context) error {
 
 //DeleteUser ...
 func DeleteUser(c echo.Context) error {
+	db := db.GetDB()
 
-	return c.JSON(http.StatusOK, "")
+	id := c.Param("id")
+	// db.Where("id = ?", id).Delete(models.User{})
+	db.Delete(models.User{}).Where("id = ?", id)
+
+	return c.JSON(http.StatusOK, "deleted with id: "+id)
 }
