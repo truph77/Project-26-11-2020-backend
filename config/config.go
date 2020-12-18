@@ -6,11 +6,11 @@ import (
 
 //Configuration struct ...
 type Configuration struct {
-	DBUsername string
-	DBPassword string
-	DBPort     string
-	DBHost     string
-	DBName     string
+	DB_USERNAME string
+	DB_PASSWORD string
+	DB_PORT     string
+	DB_HOST     string
+	DB_NAME     string
 }
 
 // GetConfig ...

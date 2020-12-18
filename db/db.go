@@ -16,15 +16,14 @@ func Init() {
 	config := config.GetConfig()
 
 	connectionString := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s",
-		config.DBHost, config.DBPort, config.DBUsername, config.DBName, config.DBPassword)
+		config.DB_HOST, config.DB_PORT, config.DB_USERNAME, config.DB_NAME, config.DB_PASSWORD)
 
-	db, _ = gorm.Open("postgres", connectionString)
+	db, err = gorm.Open("postgres", connectionString)
 	if err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println("Connect successfully")
 	}
-	fmt.Println(db)
 	db.AutoMigrate(&models.User{})
 }
 
