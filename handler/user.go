@@ -41,9 +41,9 @@ func CreateUser(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusUnprocessableEntity)
 	}
 
-	if user.Username == "" || user.Password == "" {
-		return c.JSON(http.StatusNoContent, "cant create!")
-	}
+	// if user.Username == "" || user.Password == "" {
+	// 	return c.JSON(http.StatusNoContent, "cant create!")
+	// }
 
 	db.Create(&user)
 	return c.JSON(http.StatusCreated, user)
