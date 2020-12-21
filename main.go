@@ -15,6 +15,7 @@ func main() {
 
 	// Routes
 	e.GET("/users", handler.GetUsers)
+	e.GET("/user/:id", handler.GetUser)
 	e.POST("/user", handler.CreateUser)
 	e.PUT("/users/:id", handler.UpdateUser)
 	e.DELETE("/users/:id", handler.DeleteUser)

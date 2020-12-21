@@ -9,5 +9,5 @@ require (
 	github.com/labstack/gommon v0.3.0
 	github.com/lib/pq v1.9.0 // indirect
 	github.com/tkanos/gonfig v0.0.0-20181112185242-896f3d81fadf
-	gorm.io/gorm v1.20.8 // indirect
+	gorm.io/gorm v1.20.8
 )
