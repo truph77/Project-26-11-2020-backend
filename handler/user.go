@@ -41,12 +41,28 @@ func CreateUser(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusUnprocessableEntity)
 	}
 
-	// if user.Username == "" || user.Password == "" {
-	// 	return c.JSON(http.StatusNoContent, "cant create!")
-	// }
-
 	db.Create(&user)
 	return c.JSON(http.StatusCreated, user)
+}
+
+//Login ...
+func Login(c echo.Context) error {
+	db := db.GetDB()
+	user := models.User{}
+	userResponse := models.User{}
+
+	err := c.Bind(&user)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusUnprocessableEntity)
+	}
+
+	db.Where("email = ? AND password = ?", user.Email, user.Password).Find(&userResponse)
+
+	if userResponse.Email == "" {
+		return echo.NewHTTPError(http.StatusUnprocessableEntity)
+	}
+
+	return c.JSON(http.StatusOK, userResponse)
 }
 
 //UpdateUser ...

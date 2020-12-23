@@ -10,3 +10,8 @@ type User struct {
 	Country  string `gorm:"size:100; not null" json:"country"`
 	Sponsor  string `gorm:"size:100; not null" json:"sponsor"`
 }
+
+//ResponseToken ...
+type ResponseToken struct {
+	Token string `json: "token"`
+}
