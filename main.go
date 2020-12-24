@@ -3,6 +3,7 @@ package main
 import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"github.com/truph77/db"
 	"github.com/truph77/handler"
 )
@@ -12,6 +13,10 @@ func main() {
 	defer db.CloseDB()
 
 	e := echo.New()
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
 
 	// Routes
 	e.GET("/users", handler.GetUsers)

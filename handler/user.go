@@ -2,7 +2,9 @@ package handler
 
 import (
 	"net/http"
+	"time"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
 	"github.com/truph77/db"
 	"github.com/truph77/models"
@@ -58,11 +60,26 @@ func Login(c echo.Context) error {
 
 	db.Where("email = ? AND password = ?", user.Email, user.Password).Find(&userResponse)
 
-	if userResponse.Email == "" {
-		return echo.NewHTTPError(http.StatusUnprocessableEntity)
-	}
+	if userResponse.Email != "" {
+		//create token
+		token := jwt.New(jwt.SigningMethodHS256)
 
-	return c.JSON(http.StatusOK, userResponse)
+		//set claims
+		claims := token.Claims.(jwt.MapClaims)
+		claims["email"] = userResponse.Email
+		claims["fullname"] = userResponse.Fullname
+		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+
+		t, err := token.SignedString([]byte("hihi"))
+		if err != nil {
+			return err
+		}
+
+		tokenRes := &models.ResponseToken{Token: t}
+
+		return c.JSON(http.StatusOK, tokenRes)
+	}
+	return echo.ErrUnauthorized
 }
 
 //UpdateUser ...
